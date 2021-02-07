@@ -10,7 +10,7 @@ const showCookingMaster = (alphabet) => {
     .then((data) => displayMeals(data.meals));
 };
 
-function displayMeals(meals) {
+const displayMeals = (meals) => {
   console.log(meals);
   const mainDiv = document.getElementById("display_meals");
   document.getElementById("display_meals").innerHTML = "";
@@ -24,39 +24,41 @@ function displayMeals(meals) {
       <img src="${item.strMealThumb}">
       <p class = 'meal_name'>${item.strMeal}</p>
       </div>
-    `;
+      `;
     mealDiv.innerHTML = mealInfo;
     mainDiv.appendChild(mealDiv);
     // console.log(mainDiv);
     document.getElementById("meal_input").value = "";
   }
-  // const mealIng = document.getElementById("meal_info");
-  mainDiv.addEventListener("click", function () {
-    mealIngredient(meal_info);
-  });
+};
 
-  const mealIngredient = (strIng) => {
-    fetch(`https://www.themealdb.com/api/json/v1/1/list.php?i=${strIng}`)
-      .then((res) => res.json())
-      .then((data) => displayIng(data.meals));
-  };
-  function displayIng(meals) {
-    console.log(meals);
-    const showIngredient = document.getElementById("show_ingredient");
-    // strDiv.innerHTML = "";
-    for (let i = 0; i < meals.length; i++) {
-      const ingItem = meals[i];
-      console.log(ingItem);
-      const strDiv = document.createElement("div");
-      // strDiv.className = "str_div";
-      const strInfo = `
+document.getElementById("display_meals").addEventListener("click", function () {
+  // console.log(e.target);
+
+  mealIngredient(meal_info);
+});
+function mealIngredient(strMeal) {
+  fetch(`https://www.themealdb.com/api/json/v1/1/list.php?i=${strMeal}`)
+    .then((res) => res.json())
+    .then((data) => displayIng(data.meals));
+}
+
+function displayIng(meals) {
+  console.log(meals);
+  const showIngredient = document.getElementById("show_ingredient");
+  // strDiv.innerHTML = "";
+  for (let i = 0; i < meals.length; i++) {
+    const ingItem = meals[i];
+    console.log(ingItem);
+    const strDiv = document.createElement("div");
+    // strDiv.className = "str_div";
+    const strInfo = `
         <div class= 'str_name' id='str_name'>
           <p>${ingItem.strIngredient}</p>
         </div>
       `;
-      strDiv.innerHTML = strInfo;
-      showIngredient.appendChild(strDiv);
-      // console.log(showIngredient);
-    }
+    strDiv.innerHTML = strInfo;
+    showIngredient.appendChild(strDiv);
+    // console.log(showIngredient);
   }
 }
