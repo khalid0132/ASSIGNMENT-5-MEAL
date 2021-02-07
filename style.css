@@ -1,0 +1,38 @@
+body{
+    background-color: yellow;
+}
+.input_field{
+    margin-top: 60px;
+    text-align: center;
+}
+#search_button{
+    /* padding: 8px 15px; */
+    background: navy;
+    color: white;
+}
+
+
+/* JS part */
+
+.meal_info{
+    border: 2px solid brown;
+    border-radius: 10px;
+    padding: 10px;
+    width: 100%;
+    margin: 5px;
+    text-align: center;
+}
+.meal_info img{
+    width: 100%;
+}
+.meal_name{
+    color: blue;
+    font-size: 25px;
+    font-style: italic;
+    font-weight: 600;
+}
+#display_meals{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+}
