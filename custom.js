@@ -13,20 +13,50 @@ const showCookingMaster = (alphabet) => {
 function displayMeals(meals) {
   console.log(meals);
   const mainDiv = document.getElementById("display_meals");
+  document.getElementById("display_meals").innerHTML = "";
   for (let i = 0; i < meals.length; i++) {
     const item = meals[i];
-    console.log(item);
+    // console.log(item);
     const mealDiv = document.createElement("div");
     mealDiv.className = "meal_div";
     const mealInfo = `
-      <div class = 'meal_info'>
+      <div class = 'meal_info' id='meal_info'>
       <img src="${item.strMealThumb}">
       <p class = 'meal_name'>${item.strMeal}</p>
       </div>
     `;
     mealDiv.innerHTML = mealInfo;
     mainDiv.appendChild(mealDiv);
-    console.log(mainDiv);
+    // console.log(mainDiv);
+    document.getElementById("meal_input").value = "";
   }
-  document.getElementById("meal_input").value = "";
+  // const mealIng = document.getElementById("meal_info");
+  mainDiv.addEventListener("click", function () {
+    mealIngredient(meal_info);
+  });
+
+  const mealIngredient = (strIng) => {
+    fetch(`https://www.themealdb.com/api/json/v1/1/list.php?i=${strIng}`)
+      .then((res) => res.json())
+      .then((data) => displayIng(data.meals));
+  };
+  function displayIng(meals) {
+    console.log(meals);
+    const showIngredient = document.getElementById("show_ingredient");
+    // strDiv.innerHTML = "";
+    for (let i = 0; i < meals.length; i++) {
+      const ingItem = meals[i];
+      console.log(ingItem);
+      const strDiv = document.createElement("div");
+      // strDiv.className = "str_div";
+      const strInfo = `
+        <div class= 'str_name' id='str_name'>
+          <p>${ingItem.strIngredient}</p>
+        </div>
+      `;
+      strDiv.innerHTML = strInfo;
+      showIngredient.appendChild(strDiv);
+      // console.log(showIngredient);
+    }
+  }
 }

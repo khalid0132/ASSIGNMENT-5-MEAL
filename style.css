@@ -27,7 +27,7 @@ body{
 }
 .meal_name{
     color: blue;
-    font-size: 25px;
+    /* font-size: px; */
     font-style: italic;
     font-weight: 600;
 }
